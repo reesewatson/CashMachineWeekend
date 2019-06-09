@@ -16,8 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.FlowPane;
 
-import java.awt.*;
-
 /**
  * @author ZipCodeWilmington
  */
@@ -25,7 +23,7 @@ public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
-    private Scene main, newAcc, test;
+    private Scene original, newAcc, accManagement;
 
     private Scene createContent(Stage stage) {
         VBox vbox = new VBox(10);
@@ -113,18 +111,28 @@ public class CashMachineApp extends Application {
 
         Button btnCheckBal = new Button("Check Balance");
         btnCheckBal.setOnAction(e -> {
+            accInfo.setText(cashMachine.toString());
         });
 
         Button btnMakeWithdraw = new Button("Make Withdraw");
         btnMakeWithdraw.setOnAction(e -> {
+            Double amount = Double.parseDouble(field.getText());
+            cashMachine.withdraw(amount);
+
+            accInfo.setText(cashMachine.toString());
         });
 
         Button btnMakeDeposit = new Button("Make Deposit");
         btnMakeDeposit.setOnAction(e -> {
+            Double amount = Double.parseDouble(field.getText());
+            cashMachine.deposit(amount);
+
+            accInfo.setText(cashMachine.toString());
         });
 
         Button btnLogout = new Button("Log Out");
         btnMakeDeposit.setOnAction(e -> {
+            // Go back to the log in page.
         });
 
         TextField txtBal = new TextField();
@@ -172,7 +180,7 @@ public class CashMachineApp extends Application {
         Button btnCancel = new Button("Cancel");
         btnCancel.setOnAction(e -> {
             stage.setTitle("Account Management");
-            stage.setScene(main);
+            stage.setScene(original);
         });
         Button btnOk = new Button("OK");
         btnOk.setOnAction(e -> {
@@ -187,7 +195,7 @@ public class CashMachineApp extends Application {
             if(id != 0 && name!=null && !name.equals("")) {
                 cashMachine.newAccount(id, name, email);
                 stage.setTitle("Account Management");
-                stage.setScene(main);
+                stage.setScene(original);
             }
         });
 
@@ -204,11 +212,12 @@ public class CashMachineApp extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Account Management");
         stage.setResizable(false);
-        main = createContent(stage);
-        newAcc = createNewAccount(stage);
-        test = accountManagement(stage);
 
-        stage.setScene(main);
+        original = createContent(stage);
+        newAcc = createNewAccount(stage);
+        accManagement = accountManagement(stage);
+
+        stage.setScene(accManagement);
         stage.show();
     }
 
