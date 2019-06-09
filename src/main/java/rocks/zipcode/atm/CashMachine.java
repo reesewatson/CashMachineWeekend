@@ -53,6 +53,10 @@ public class CashMachine {
         }
     }
 
+    public void newAccount(Integer id, String name, String email){
+        bank.newAccount(id, new AccountData(id, name, email, 0));
+    }
+
     @Override
     public String toString() {
         return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";

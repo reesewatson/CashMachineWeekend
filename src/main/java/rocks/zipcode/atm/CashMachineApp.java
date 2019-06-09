@@ -105,8 +105,19 @@ public class CashMachineApp extends Application {
         });
         Button btnOk = new Button("OK");
         btnOk.setOnAction(e -> {
-            stage.setTitle("Account Management");
-            stage.setScene(main);
+            int id;
+            try {
+                id = Integer.parseInt(txtFieldID.getText());
+            } catch (Exception ex) {
+                id = 0;
+            }
+            String name = txtFieldID.getText();
+            String email = txtFieldID.getText();
+            if(id != 0 && !name.equals("") && !name.equals("")) {
+                cashMachine.newAccount(id, name, email);
+                stage.setTitle("Account Management");
+                stage.setScene(main);
+            }
         });
         HBox butts = new HBox(10);
         butts.getChildren().addAll(btnCancel, btnOk);

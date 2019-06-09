@@ -1,5 +1,6 @@
 package rocks.zipcode.atm.bank;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
@@ -20,6 +21,14 @@ public class Bank {
         accounts.put(2000, new PremiumAccount(new AccountData(
                 2000, "Example 2", "example2@gmail.com", 200
         )));
+    }
+
+    public Boolean newAccount(Integer id, AccountData data){
+        if(accounts.get(id)==null) {
+            accounts.put(id, new BasicAccount(data));
+            return true;
+        } else
+            return false;
     }
 
     public ActionResult<AccountData> getAccountById(int id) {
