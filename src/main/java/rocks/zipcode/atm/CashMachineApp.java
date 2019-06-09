@@ -96,8 +96,8 @@ public class CashMachineApp extends Application {
         accInfo.setFont(new Font(14));
 
         TextArea pane = new TextArea();
-        pane.setMaxWidth(200);
-        pane.setMaxHeight(150);
+        pane.setMaxWidth(250);
+        pane.setMaxHeight(120);
         pane.setDisable(true);
         allBox.setAlignment(Pos.CENTER);
 
