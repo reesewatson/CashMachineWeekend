@@ -96,7 +96,7 @@ public class CashMachineApp extends Application {
         TextArea pane = new TextArea();
         pane.setMaxWidth(250);
         pane.setMaxHeight(120);
-        pane.setDisable(true);
+//        pane.setDisable(true);
         allBox.setAlignment(Pos.CENTER);
 
         info.getChildren().addAll(accInfo, pane);
@@ -109,36 +109,37 @@ public class CashMachineApp extends Application {
         heading.setFont(new Font(20));
         encase.setAlignment(heading, Pos.CENTER);
 
-        Button btnCheckBal = new Button("Check Balance");
-        btnCheckBal.setOnAction(e -> {
-            accInfo.setText(cashMachine.toString());
-        });
-
-        Button btnMakeWithdraw = new Button("Make Withdraw");
-        btnMakeWithdraw.setOnAction(e -> {
-            Double amount = Double.parseDouble(field.getText());
-            cashMachine.withdraw(amount);
-
-            accInfo.setText(cashMachine.toString());
-        });
-
-        Button btnMakeDeposit = new Button("Make Deposit");
-        btnMakeDeposit.setOnAction(e -> {
-            Double amount = Double.parseDouble(field.getText());
-            cashMachine.deposit(amount);
-
-            accInfo.setText(cashMachine.toString());
-        });
-
-        Button btnLogout = new Button("Log Out");
-        btnMakeDeposit.setOnAction(e -> {
-            // Go back to the log in page.
-        });
-
         TextField txtBal = new TextField();
         txtBal.setDisable(true);
         TextField txtWithdraw = new TextField();
         TextField txtDeposit= new TextField();
+
+        Button btnCheckBal = new Button("Check Balance");
+        btnCheckBal.setOnAction(e -> {
+            pane.setText(cashMachine.toString());
+        });
+
+        Button btnMakeWithdraw = new Button("Make Withdraw");
+        btnMakeWithdraw.setOnAction(e -> {
+            Double amount = Double.parseDouble(txtWithdraw.getText());
+            cashMachine.withdraw(amount);
+
+            pane.setText(cashMachine.toString());
+        });
+
+        Button btnMakeDeposit = new Button("Make Deposit");
+        btnMakeDeposit.setOnAction(e -> {
+            Double amount = Double.parseDouble(txtDeposit.getText());
+            cashMachine.deposit(amount);
+
+            pane.setText(cashMachine.toString());
+        });
+
+        Button btnLogout = new Button("Log Out");
+        btnLogout.setOnAction(e -> {
+            // Go back to the log in page.
+        });
+
 
         encase.setBottom(btnLogout);
         encase.setAlignment(btnLogout, Pos.CENTER);
@@ -158,6 +159,8 @@ public class CashMachineApp extends Application {
         HBox fieldsAndLabels = new HBox();
         VBox labels = new VBox();
         VBox fields = new VBox();
+
+        Label premium = new Label("See your local branch to start a premium account.");
 
         Label lblID = new Label("ID:");
         TextField txtFieldID = new TextField ();
@@ -180,7 +183,7 @@ public class CashMachineApp extends Application {
         Button btnCancel = new Button("Cancel");
         btnCancel.setOnAction(e -> {
             stage.setTitle("Account Management");
-            stage.setScene(original);
+            stage.setScene(accManagement);
         });
 
         Button btnOk = new Button("OK");
@@ -196,7 +199,8 @@ public class CashMachineApp extends Application {
             if(id != 0 && !name.equals("") && !email.equals("")) {
                 cashMachine.newAccount(id, name, email);
                 stage.setTitle("Account Management");
-                stage.setScene(original);
+                cashMachine.login(id);
+                stage.setScene(accManagement);
             }
         });
 
@@ -205,7 +209,7 @@ public class CashMachineApp extends Application {
         butts.setAlignment(Pos.CENTER);
 
         fieldsAndLabels.getChildren().addAll(butts);
-        mainVertical.getChildren().addAll(fieldsAndLabels, butts);
+        mainVertical.getChildren().addAll(fieldsAndLabels, butts, premium);
         return new Scene(mainVertical);
     }
 
@@ -218,7 +222,7 @@ public class CashMachineApp extends Application {
         newAcc = createNewAccount(stage);
         accManagement = accountManagement(stage);
 
-        stage.setScene(accManagement);
+        stage.setScene(newAcc);
         stage.show();
     }
 
