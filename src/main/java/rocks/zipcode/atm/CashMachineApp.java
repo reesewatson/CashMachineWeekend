@@ -182,6 +182,7 @@ public class CashMachineApp extends Application {
             stage.setTitle("Account Management");
             stage.setScene(original);
         });
+
         Button btnOk = new Button("OK");
         btnOk.setOnAction(e -> {
             int id;
@@ -190,9 +191,9 @@ public class CashMachineApp extends Application {
             } catch (Exception ex) {
                 id = 0;
             }
-            String name = txtFieldID.getText();
-            String email = txtFieldID.getText();
-            if(id != 0 && name!=null && !name.equals("")) {
+            String name = txtFieldName.getText();
+            String email = txtFieldEmail.getText();
+            if(id != 0 && !name.equals("") && !email.equals("")) {
                 cashMachine.newAccount(id, name, email);
                 stage.setTitle("Account Management");
                 stage.setScene(original);
