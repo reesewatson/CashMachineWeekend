@@ -1,5 +1,7 @@
 package rocks.zipcode.atm;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -18,8 +20,9 @@ public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+    private Scene main, newAcc;
 
-    private Parent createContent() {
+    private Scene createContent(Stage stage) {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
@@ -56,19 +59,66 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
+        Button btnNewAcc = new Button("New Account");
+        btnNewAcc.setOnAction(e -> {
+            stage.setScene(newAcc);
+        });
+
         FlowPane flowpane = new FlowPane();
 
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
+        flowpane.getChildren().add(btnNewAcc);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
-        return vbox;
+        return new Scene(vbox);
+    }
+
+    private Scene createNewAccount(Stage stage){
+        stage.setTitle("Create New Account");
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(600, 600);
+
+        Label lblID = new Label("ID:");
+        TextField txtFieldID = new TextField ();
+        HBox hbID = new HBox();
+        hbID.getChildren().addAll(lblID, txtFieldID);
+        hbID.setSpacing(10);
+
+        Label lblName = new Label("Name:");
+        TextField txtFieldName = new TextField ();
+        HBox hbName = new HBox();
+        hbName.getChildren().addAll(lblName, txtFieldName);
+        hbName.setSpacing(10);
+
+        Label lblEmail = new Label("E-mail Address:");
+        TextField txtFieldEmail = new TextField ();
+        HBox hbEmail = new HBox();
+        hbEmail.getChildren().addAll(lblEmail, txtFieldEmail);
+        hbEmail.setSpacing(10);
+
+        Button btnCancel = new Button("Cancel");
+        btnCancel.setOnAction(e -> {
+            stage.setScene(main);
+        });
+        Button btnOk = new Button("OK");
+        btnOk.setOnAction(e -> {
+            stage.setScene(main);
+        });
+        HBox butts = new HBox(10);
+        butts.getChildren().addAll(btnCancel, btnOk);
+
+        vbox.getChildren().addAll(hbID, hbName, hbEmail, butts);
+        return new Scene(vbox);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
+        main = createContent(stage);
+        newAcc = createNewAccount(stage);
+
+        stage.setScene(main);
         stage.show();
     }
 
