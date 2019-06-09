@@ -9,9 +9,9 @@ public final class AccountData {
     private final String name;
     private final String email;
 
-    private final int balance;
+    private final Double balance;
 
-    public AccountData(int id, String name, String email, int balance) {
+    public AccountData(int id, String name, String email, Double balance) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -30,7 +30,7 @@ public final class AccountData {
         return email;
     }
 
-    public int getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
@@ -39,6 +39,6 @@ public final class AccountData {
         return "Account id: " + id + '\n' +
                 "Name: " + name + '\n' +
                 "Email: " + email + '\n' +
-                "Balance: " + balance;
+                String.format("Balance: %.2f", balance);
     }
 }

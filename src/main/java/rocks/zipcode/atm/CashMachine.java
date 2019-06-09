@@ -29,8 +29,8 @@ public class CashMachine {
         );
     }
 
-    public void deposit(int amount) {
-        if (accountData != null) {
+    public void deposit(Double amount) {
+        if (amount > 0 && accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
                     update
@@ -38,8 +38,8 @@ public class CashMachine {
         }
     }
 
-    public void withdraw(int amount) {
-        if (accountData != null) {
+    public void withdraw(Double amount) {
+        if (amount > 0 && accountData != null) {
             tryCall(
                     () -> bank.withdraw(accountData, amount),
                     update
@@ -54,7 +54,7 @@ public class CashMachine {
     }
 
     public void newAccount(Integer id, String name, String email){
-        bank.newAccount(id, new AccountData(id, name, email, 0));
+        bank.newAccount(id, new AccountData(id, name, email, 0d));
     }
 
     @Override

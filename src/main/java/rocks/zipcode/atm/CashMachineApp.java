@@ -43,7 +43,7 @@ public class CashMachineApp extends Application {
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            Double amount = Double.parseDouble(field.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -51,7 +51,7 @@ public class CashMachineApp extends Application {
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            Double amount = Double.parseDouble(field.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -208,7 +208,7 @@ public class CashMachineApp extends Application {
         newAcc = createNewAccount(stage);
         test = accountManagement(stage);
 
-        stage.setScene(test);
+        stage.setScene(main);
         stage.show();
     }
 
