@@ -61,6 +61,7 @@ public class CashMachineApp extends Application {
 
         Button btnNewAcc = new Button("New Account");
         btnNewAcc.setOnAction(e -> {
+            stage.setTitle("New Account");
             stage.setScene(newAcc);
         });
 
@@ -76,7 +77,6 @@ public class CashMachineApp extends Application {
     }
 
     private Scene createNewAccount(Stage stage){
-        stage.setTitle("Create New Account");
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
@@ -100,10 +100,12 @@ public class CashMachineApp extends Application {
 
         Button btnCancel = new Button("Cancel");
         btnCancel.setOnAction(e -> {
+            stage.setTitle("Account Management");
             stage.setScene(main);
         });
         Button btnOk = new Button("OK");
         btnOk.setOnAction(e -> {
+            stage.setTitle("Account Management");
             stage.setScene(main);
         });
         HBox butts = new HBox(10);
@@ -115,6 +117,7 @@ public class CashMachineApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setTitle("Account Management");
         main = createContent(stage);
         newAcc = createNewAccount(stage);
 
