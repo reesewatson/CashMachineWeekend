@@ -14,12 +14,12 @@ public class Bank {
     private Map<Integer, Account> accounts = new HashMap<>();
 
     public Bank() {
-        accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Example 1", "example1@gmail.com", 500d
+        accounts.put(1234, new BasicAccount(new AccountData(
+                1234, "Dolio Durant", "gangstaBlueGrass@gmail.com", 1000000d
         )));
 
-        accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Example 2", "example2@gmail.com", 200d
+        accounts.put(4321, new PremiumAccount(new AccountData(
+                4321, "Kris Younger", "codeBeneathMySails@gmail.com", 2000000d
         )));
     }
 

@@ -36,9 +36,9 @@ public final class AccountData {
 
     @Override
     public String toString() {
-        return "Account id: " + id + '\n' +
+        return "Account ID: " + id + '\n' +
                 "Name: " + name + '\n' +
                 "Email: " + email + '\n' +
-                String.format("Balance: %.2f", balance);
+                String.format("Available Balance: %.2f", balance);
     }
 }
