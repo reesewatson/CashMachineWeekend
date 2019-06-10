@@ -58,4 +58,8 @@ public class Bank {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
         }
     }
+
+    public Boolean checkExisting(Integer id){
+        return accounts.containsKey(id);
+    }
 }

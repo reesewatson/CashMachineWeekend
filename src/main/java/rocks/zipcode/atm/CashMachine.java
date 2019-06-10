@@ -76,4 +76,8 @@ public class CashMachine {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public Boolean checkAccounts(Integer id){
+        return bank.checkExisting(id);
+    }
 }
